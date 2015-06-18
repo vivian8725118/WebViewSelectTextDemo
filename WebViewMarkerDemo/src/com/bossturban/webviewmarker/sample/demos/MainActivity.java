@@ -3,6 +3,7 @@ package com.bossturban.webviewmarker.sample.demos;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -35,10 +36,16 @@ public class MainActivity extends Activity {
 			public void selectionChanged(int top, int left, int right, int bottom, String text) {
 				pop.dismiss();
 				if (bottom - top == 0) {
-					pop.showAtLocation(mWebView, Gravity.NO_GRAVITY, (right + left) / 2 - pop.getWidth(mWebView.getWidth(), mWebView.getHeight()) / 2, top);
+					pop.showAtLocation(mWebView, Gravity.NO_GRAVITY, (right + left) / 2 - pop.getWidth(mWebView.getWidth(), mWebView.getHeight()) / 2,
+							top - mWebView.getScrollY() + pop.getHeight(mWebView.getWidth(), mWebView.getHeight()) / 3);
 				} else {
-					pop.showAtLocation(mWebView, Gravity.NO_GRAVITY, ScreenSizeUtil.getScreenWidth(MainActivity.this) / 2 - pop.getWidth(mWebView.getWidth(), mWebView.getHeight()) / 2, top);
+					pop.showAtLocation(mWebView, Gravity.NO_GRAVITY, ScreenSizeUtil.getScreenWidth(MainActivity.this) / 2 - pop.getWidth(mWebView.getWidth(), mWebView.getHeight()) / 2,
+							top - mWebView.getScrollY() + pop.getHeight(mWebView.getWidth(), mWebView.getHeight()) / 3);
 				}
+				Log.e("top", "top:" + String.valueOf(top));
+				Log.e("top", "bottom:" + String.valueOf(bottom));
+				Log.e("top", "mWebView.getScrollY():" + String.valueOf(mWebView.getScrollY()));
+				Log.e("top", "top - mWebView.getScrollY():" + String.valueOf(top - mWebView.getScrollY() - 10));
 			}
 
 			@Override
